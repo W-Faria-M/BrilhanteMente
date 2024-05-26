@@ -1,0 +1,46 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.box {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 2px solid purple;
+}
+.header .box {
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header .box h1 #roxo {
+    color: purple;
+}
+.header .box h1 #verde {
+    color: green;
+}
+
+.box a {
+    text-decoration: none;
+    color: black;
+}
+
+.agora {
+    font-weight: 800;
+}
+
+.navbar {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    color: purple;
+}
