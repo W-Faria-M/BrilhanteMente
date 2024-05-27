@@ -1,46 +1,124 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  --tamanho-header: 80px;
+  --tamanho-pai: calc(
+    100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px
+  );
+  --tamanho-footer: 65px;
 }
 
 .box {
-    display: flex;
-    width: 80%;
-    margin: auto;
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+.box h1 img {
+    width: 30px;
 }
 
 .header {
-    height: 80px;
-    border-bottom: 2px solid purple;
+  height: 80px;
+  border-bottom: 2px solid rgb(47, 236, 0);
+  font-size: larger;
+  font-weight: bold;
 }
 .header .box {
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .header .box h1 #roxo {
-    color: purple;
+  color: purple;
 }
 .header .box h1 #verde {
-    color: green;
+  color: green;
 }
 
 .box a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .agora {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .navbar {
-    width: 300px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  color: purple;
+}
+
+/* .footer {
+    background-color: #21db00;
+    height: 150px;
+    color: #fff;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    color: purple;
+    font-size: 15px;
+  }
+
+  .footer .box_footer {
+    justify-content: center;
+    text-align: center;
+  } */
+
+.pai {
+  display: flex;
+  height: var(--tamanho-pai);
+  justify-content: center;
+  align-items: center;
+}
+
+.pai .box_login {
+  display: flex;
+  width: 400px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.pai .box_login .form {
+  display: flex;
+  background-color: rgb(163, 71, 163);
+  width: 300px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid;
+}
+
+.pai img {
+  width: 50.5%;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 5px 0;
+  font-size: larger;
+}
+
+.campo input {
+  border-radius: 10px 5px;
+  text-align: center;
+  width: 150px;
+  height: 25px;
+}
+
+.botao {
+  border-radius: 15px;
+  width: 100px;
+  height: 35px;
 }
