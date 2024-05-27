@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(140, 210, 120);
+}
+
 :root {
   --tamanho-header: 80px;
   --tamanho-pai: calc(
@@ -24,9 +28,9 @@
 
 .header {
   height: 80px;
-  border-bottom: 2px solid rgb(47, 236, 0);
+  border-bottom: 2px solid purple;
   font-size: larger;
-  font-weight: bold;
+
 }
 .header .box {
   justify-content: space-between;
@@ -59,18 +63,16 @@
   color: purple;
 }
 
-/* .footer {
-    background-color: #21db00;
-    height: 150px;
+.footer {
+    background-color: purple;
+    height: var(--tamanho-footer);
     color: #fff;
-    display: flex;
     font-size: 15px;
   }
 
   .footer .box_footer {
-    justify-content: center;
     text-align: center;
-  } */
+  }
 
 .pai {
   display: flex;
@@ -95,11 +97,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid;
+  border: 2px solid purple;
 }
 
 .pai img {
-  width: 50.5%;
+  width: 47%;
 }
 
 .campo {
