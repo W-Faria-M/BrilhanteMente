@@ -101,8 +101,22 @@ body {
   border: 2px solid purple;
 }
 
-.pai img {
-  width: 45%;
+.pai .box_login .form_cadastro {
+  display: flex;
+  background-color: rgb(163, 71, 163);
+  width: 450px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid purple;
+}
+
+.pai .box_login .form_cadastro #etapa_1, #etapa_2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .campo {
