@@ -25,78 +25,88 @@
       </div>
     </div>
     <div class="pai">
-      <div class="box_login">
-        <div class="form_cadastro">
-          <h2>Faça seu cadastro</h2>
+      <div class="box_quadro">
+        <div class="box_login">
+          <div class="form_cadastro">
+            <h2>Faça seu cadastro</h2>
             <div id="etapa_1">
-            <div class="campo">
-              <span>Nome Completo</span>
-              <input type="text" id="ipt_usuario" />
+              <div class="campo">
+                <span>Nome Completo</span>
+                <input type="text" id="ipt_usuario" />
+              </div>
+              <div class="campo">
+                <span>Usuário</span>
+                <input type="text" id="ipt_senha" />
+              </div>
+              <div class="campo">
+                <span>Senha</span>
+                <input type="text" id="ipt_senha" />
+              </div>
+              <div class="campo">
+                <span>Confirmar de senha</span>
+                <input type="text" id="ipt_senha" />
+              </div>
+              <br />
+              <button class="botao" onclick="continuar()">Continuar</button>
             </div>
-            <div class="campo">
-              <span>Usuário</span>
-              <input type="text" id="ipt_senha" />
+            <div style="display: none" id="etapa_2">
+              <div class="campo">
+                <span>Estado</span>
+                <select id="slct_estados">
+                  <option selected disabled value="#">
+                    Selecione um estado
+                  </option>
+                  <option value="1">Acre (AC)</option>
+                  <option value="2">Alagoas (AL)</option>
+                  <option value="3">Amapá (AP)</option>
+                  <option value="4">Amazonas (AM)</option>
+                  <option value="5">Bahia (BA)</option>
+                  <option value="6">Ceará (CE)</option>
+                  <option value="7">Espírito Santo (ES)</option>
+                  <option value="8">Goiás (GO)</option>
+                  <option value="9">Maranhão (MA)</option>
+                  <option value="10">Mato Grosso (MT)</option>
+                  <option value="11">Mato Grosso do Sul (MS)</option>
+                  <option value="12">Minas Gerais (MG)</option>
+                  <option value="13">Pará (PA)</option>
+                  <option value="14">Paraíba (PB)</option>
+                  <option value="15">Paraná (PR)</option>
+                  <option value="16">Pernambuco (PE)</option>
+                  <option value="17">Piauí (PI)</option>
+                  <option value="18">Rio de Janeiro (RJ)</option>
+                  <option value="19">Rio Grande do Norte (RN)</option>
+                  <option value="20">Rio Grande do Sul (RS)</option>
+                  <option value="21">Rondônia (RO)</option>
+                  <option value="22">Roraima (RR)</option>
+                  <option value="23">Santa Catarina (SC)</option>
+                  <option value="24">São Paulo (SP)</option>
+                  <option value="25">Sergipe (SE)</option>
+                  <option value="26">Tocantins (TO)</option>
+                </select>
+              </div>
+              <div class="campo">
+                <span>Idade</span>
+                <input type="text" id="ipt_senha" />
+              </div>
+              <div class="campo">
+                <span>Nº de filhos</span>
+                <input type="number" id="ipt_senha" />
+              </div>
+              <div class="campo">
+                <span>Filhos planejados</span>
+                <input type="number" id="ipt_senha" />
+              </div>
+              <br />
+              <button class="botao" onclick="cadastrar()">cadastrar</button>
             </div>
-            <div class="campo">
-              <span>Senha</span>
-              <input type="text" id="ipt_senha" />
-            </div>
-            <div class="campo">
-              <span>Confirmar de senha</span>
-              <input type="text" id="ipt_senha" />
-            </div> <br>
-            <button class="botao" onclick="continuar()">Continuar</button>
-          </div>
-          <div style="display: none;" id="etapa_2">
-            <div class="campo">
-              <span>Estado</span>
-              <select id="slct_estados">
-                <option selected disabled value="#">Selecione um estado</option>
-                <option value="1">Acre (AC)</option>
-                <option value="2">Alagoas (AL)</option>
-                <option value="3">Amapá (AP)</option>
-                <option value="4">Amazonas (AM)</option>
-                <option value="5">Bahia (BA)</option>
-                <option value="6">Ceará (CE)</option>
-                <option value="7">Espírito Santo (ES)</option>
-                <option value="8">Goiás (GO)</option>
-                <option value="9">Maranhão (MA)</option>
-                <option value="10">Mato Grosso (MT)</option>
-                <option value="11">Mato Grosso do Sul (MS)</option>
-                <option value="12">Minas Gerais (MG)</option>
-                <option value="13">Pará (PA)</option>
-                <option value="14">Paraíba (PB)</option>
-                <option value="15">Paraná (PR)</option>
-                <option value="16">Pernambuco (PE)</option>
-                <option value="17">Piauí (PI)</option>
-                <option value="18">Rio de Janeiro (RJ)</option>
-                <option value="19">Rio Grande do Norte (RN)</option>
-                <option value="20">Rio Grande do Sul (RS)</option>
-                <option value="21">Rondônia (RO)</option>
-                <option value="22">Roraima (RR)</option>
-                <option value="23">Santa Catarina (SC)</option>
-                <option value="24">São Paulo (SP)</option>
-                <option value="25">Sergipe (SE)</option>
-                <option value="26">Tocantins (TO)</option>
-              </select>
-            </div>
-            <div class="campo">
-              <span>Idade</span>
-              <input type="text" id="ipt_senha" />
-            </div>
-            <div class="campo">
-              <span>Nº de filhos</span>
-              <input type="number" id="ipt_senha" />
-            </div>
-            <div class="campo">
-              <span>Filhos planejados</span>
-              <input type="number" id="ipt_senha" />
-            </div> <br>
-            <button class="botao" onclick="cadastrar()">cadastrar</button>
           </div>
         </div>
+        <img
+          style="width: 24%"
+          src="imagens/Imagem do WhatsApp de 2024-05-26 à(s) 16.08.01_24142430.jpg"
+          alt=""
+        />
       </div>
-      <img style="width: 24.4%;" src="imagens/Imagem do WhatsApp de 2024-05-26 à(s) 16.08.01_24142430.jpg" alt="" />
     </div>
     <div class="footer">
       <div class="box_footer">

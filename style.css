@@ -127,6 +127,11 @@ body {
     align-items: center;
   }
 
+  .pai .box_quadro {
+    display: flex;
+    justify-content: center;
+  }
+
 .pai .box_login {
   display: flex;
   width: 400px;
@@ -150,7 +155,7 @@ body {
   display: flex;
   background-color: #BA68C8;
   width: 450px;
-  height: 500px;
+  height: 520px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
