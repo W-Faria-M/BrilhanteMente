@@ -1,3 +1,14 @@
+/* 
+Verde
+#4CAF50 - Um verde médio e vibrante.
+#388E3C - Um verde mais escuro e profundo.
+#81C784 - Um verde mais suave e claro.
+Roxo
+#9C27B0 - Um roxo vibrante e forte.
+#673AB7 - Um roxo mais escuro e profundo.
+#BA68C8 - Um roxo mais suave e claro.
+*/
+
 * {
   margin: 0px;
   padding: 0px;
@@ -5,7 +16,8 @@
 }
 
 body {
-  background-color: rgb(140, 210, 120);
+  /* background-color: rgb(140, 210, 120); */
+  background-color: rgb(129, 199, 132);
 }
 
 :root {
@@ -39,10 +51,10 @@ body {
 }
 
 .header .box h1 #roxo {
-  color: purple;
+  color: #9C27B0;
 }
 .header .box h1 #verde {
-  color: green;
+  color: #388E3C;
 }
 
 .box a {
@@ -75,12 +87,45 @@ body {
     text-align: center;
   }
 
-.pai {
-  display: flex;
-  height: var(--tamanho-pai);
-  justify-content: center;
-  align-items: center;
-}
+  .pai_home {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .pai_home .box_home {
+    display: flex;
+    width: 1400px;
+    height: 400px;
+    justify-content: space-evenly;
+    background-color: #BA68C8;
+    border: 2px solid purple;
+  }
+
+  .pai_home .info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .inside {
+    display: flex;
+    width: 600px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pai {
+    display: flex;
+    height: var(--tamanho-pai);
+    justify-content: center;
+    align-items: center;
+  }
 
 .pai .box_login {
   display: flex;
@@ -92,7 +137,7 @@ body {
 
 .pai .box_login .form {
   display: flex;
-  background-color: rgb(163, 71, 163);
+  background-color: #BA68C8;
   width: 300px;
   height: 300px;
   justify-content: center;
@@ -103,7 +148,7 @@ body {
 
 .pai .box_login .form_cadastro {
   display: flex;
-  background-color: rgb(163, 71, 163);
+  background-color: #BA68C8;
   width: 450px;
   height: 500px;
   justify-content: center;
