@@ -63,6 +63,7 @@ body {
 }
 
 .agora {
+  text-decoration: underline;
   font-weight: 800;
 }
 
@@ -72,8 +73,16 @@ body {
   align-items: center;
   justify-content: space-between;
   list-style: none;
-  color: purple;
+  color: #9C27B0;
 }
+
+.navbar button {
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
 
 .footer {
     background-color: purple;
@@ -90,9 +99,8 @@ body {
   .pai_home {
     display: flex;
     flex-direction: column;
-    justify-content: end;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
   }
   
   .pai_home .box_home {
@@ -101,7 +109,7 @@ body {
     height: 400px;
     justify-content: space-evenly;
     background-color: #BA68C8;
-    border: 2px solid purple;
+    border: 2px solid #9C27B0;
   }
 
   .pai_home .info {
@@ -118,6 +126,64 @@ body {
     width: 600px;
     flex-direction: column;
     text-align: center;
+  }
+
+  .pai_home .blog {
+    display: flex;
+    width: 830px;
+    height: 1500px;
+    justify-content: space-evenly;
+    background-color: #BA68C8;
+    border: 2px solid #9C27B0;
+  }
+
+  .perfil {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 300px;
+    padding: 20px;
+    border: 2px solid;
+  }
+
+  .feed {
+    width: 600px;
+    margin: 10px;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .box_post {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    padding: 5px;
+    border: 2px solid;
+  }
+
+  .post {
+    width: 100%;
+    height: 140px;
+    padding: 5px;
+    border: 2px solid;
+  }
+
+  .botoes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .botoes button {
+    height: 20px;
   }
 
   .pai {
@@ -148,7 +214,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid purple;
+  border: 2px solid #9C27B0;
 }
 
 .pai .box_login .form_cadastro {
@@ -159,7 +225,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid purple;
+  border: 2px solid #9C27B0;
 }
 
 .pai .box_login .form_cadastro #etapa_1, #etapa_2 {
