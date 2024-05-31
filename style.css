@@ -16,8 +16,7 @@ Roxo
 }
 
 body {
-  /* background-color: rgb(140, 210, 120); */
-  background-color: rgb(129, 199, 132);
+  background-color: #81c784;
 }
 
 :root {
@@ -130,7 +129,7 @@ body {
 
   .pai_home .blog {
     display: flex;
-    width: 830px;
+    width: 800px;
     height: 1500px;
     justify-content: space-evenly;
     background-color: #BA68C8;
@@ -143,7 +142,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 200px;
+    width: 250px;
     height: 300px;
     padding: 20px;
     border: 2px solid;
@@ -158,6 +157,71 @@ body {
     justify-content: space-evenly;
     align-items: center;
   }
+
+  .comunidade {
+    width: 600px;
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Estilos gerais do formulário */
+#form_postagem {
+  width: 100%;
+  height: 350px;
+  padding: 20px;
+  background-color: #BA68C8;
+  border: 1px solid #9C27B0;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Estilos para os rótulos */
+#form_postagem label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos para os campos de entrada */
+#form_postagem input[type="text"],
+#form_postagem textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: inherit;
+  color: #333;
+}
+
+/* Estilos específicos para o textarea */
+#form_postagem textarea {
+  resize: none;
+}
+
+/* Estilos para o botão */
+#form_postagem button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #81c784;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Efeito de hover no botão */
+#form_postagem button:hover {
+  background-color: #50c256;
+}
 
   .box_post {
     display: flex;

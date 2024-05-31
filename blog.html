@@ -9,7 +9,7 @@
 <body>
     <div class="header">
         <div class="box">
-          <h1 class="titulo">
+          <h1>
             <img src="imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg" alt="Logo" /> <span id="roxo">Brilhante</span
             ><span id="verde">Mente</span>
           </h1>
@@ -60,6 +60,39 @@
                         <span><button>Curtir</button> <b>12</b> Likes</span>  <button>Compartilhar</button>
                     </div>
                 </div>
+            </div>
+            <div style="display: none;" class="comunidade">
+              <div class="avisos">
+                <div id="alerta">
+                </div>
+                <div class="container">
+                    <h1>Fazer um Post</h1>
+                    <div class="div-form">
+                        <form id="form_postagem" method="post" onsubmit="return publicar(event)">
+                            <label>
+                                Título:
+                                <br>
+                                <input name="titulo" id="titulo" maxlength="100" type="text">
+                            </label>
+                            <br>
+                            <br>
+                            <label>
+                                Descrição (máximo de 250 caracteres):
+                                <br>
+                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                            </label>
+                            <br>
+                            <br>
+                            <button>Enviar</button>
+                        </form>
+                    </div>
+                    <h1>Mural de Posts</h1>
+                    <div class="div-results">
+                        <div id="feed_container" class="feed-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
       </div>
