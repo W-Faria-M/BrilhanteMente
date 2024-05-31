@@ -1,127 +1,184 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>AquaTech | Cadastro</title>
-
-  <script src="./js/sessao.js"></script>
-
-  <link rel="stylesheet" href="./css/estilo.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-</head>
-
-<body onload="listar()">
-  <!--header inicio-->
-  <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="simulador.html">Simulador</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--header fim-->
-
-  <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <link rel="icon" href="./assets/imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg">
+    <title>BrilhanteMente | Cadastro</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="box">
+        <h1>
+          <img
+            src="assets/imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg"
+            alt="Logo"
+          />
+          <span id="roxo">Brilhante</span><span id="verde">Mente</span>
+        </h1>
+        <ul class="navbar">
+          <li><a href="index.html">Inicial</a></li>
+          <li>|</li>
+          <li><a href="login.html">Login</a></li>
+          <li class="agora"><a href="#">Cadastro</a></li>
+        </ul>
       </div>
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
-            <span>Empresa:</span>
-            <select name="empresas" id="listaEmpresas">
-              <option selected>Selecione uma empresa</option>
-            </select>
+    <div class="pai">
+      <div class="box_quadro">
+        <div class="box_login">
+          <div class="form_cadastro">
+            <h2>Faça seu cadastro</h2>
+            <div id="etapa_1">
+              <div class="campo">
+                <span>Nome Completo</span>
+                <input type="text" id="ipt_nome" />
+              </div>
+              <div class="campo">
+                <span>Usuário</span>
+                <input type="text" id="ipt_usuario" />
+              </div>
+              <div class="campo">
+                <span>Senha</span>
+                <input type="text" id="ipt_senha" />
+              </div>
+              <div class="campo">
+                <span>Confirmar senha</span>
+                <input type="text" id="ipt_confSenha" />
+              </div>
+              <br />
+              <button class="botao" onclick="continuar()">Continuar</button>
+            </div>
+            <div style="display: none" id="etapa_2">
+              <div class="campo">
+                <span>Estado</span>
+                <select id="slct_estado">
+                  <option selected disabled value="#">
+                    Selecione um estado
+                  </option>
+                  <option>Acre (AC)</option>
+                  <option>Alagoas (AL)</option>
+                  <option>Amapá (AP)</option>
+                  <option>Amazonas (AM)</option>
+                  <option>Bahia (BA)</option>
+                  <option>Ceará (CE)</option>
+                  <option>Espírito Santo (ES)</option>
+                  <option>Goiás (GO)</option>
+                  <option>Maranhão (MA)</option>
+                  <option>Mato Grosso (MT)</option>
+                  <option>Mato Grosso do Sul (MS)</option>
+                  <option>Minas Gerais (MG)</option>
+                  <option>Pará (PA)</option>
+                  <option>Paraíba (PB)</option>
+                  <option>Paraná (PR)</option>
+                  <option>Pernambuco (PE)</option>
+                  <option>Piauí (PI)</option>
+                  <option>Rio de Janeiro (RJ)</option>
+                  <option>Rio Grande do Norte (RN)</option>
+                  <option>Rio Grande do Sul (RS)</option>
+                  <option>Rondônia (RO)</option>
+                  <option>Roraima (RR)</option>
+                  <option>Santa Catarina (SC)</option>
+                  <option>São Paulo (SP)</option>
+                  <option>Sergipe (SE)</option>
+                  <option>Tocantins (TO)</option>
+                </select>
+              </div>
+              <div class="campo">
+                <span>Idade</span>
+                <input type="text" id="ipt_idade" />
+              </div>
+              <div class="campo">
+                <span>Nº de filhos</span>
+                <input type="number" id="ipt_filhos" />
+              </div>
+              <div class="campo">
+                <span>Filhos planejados</span>
+                <input type="number" id="ipt_planejados" />
+              </div>
+              <br />
+              <button class="botao" onclick="cadastrar()">cadastrar</button>
+            </div>
           </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
-        </div>
-
-        <div id="div_erros_login"></div>
+        <img
+          style="width: 24%"
+          src="assets/imagens/Imagem do WhatsApp de 2024-05-26 à(s) 16.08.01_24142430.jpg"
+          alt=""
+        />
       </div>
     </div>
-  </div>
-
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-      <span class="version">v1.0.0</span>
+    <div class="footer">
+      <div class="box_footer">
+        <h4>E-mail para contato: gabriel.barranco@sptech.school</h4>
+        <a href="https://github.com/W-Faria-M/BrilhanteMente"
+          ><img
+            src="https://media.wired.com/photos/5b36a5b6e237e87ce9592b8e/master/pass/Github-Microsoft-BIZ-FINAL.jpg"
+            style="width: 40px"
+            alt="`GitHub Icon"
+        /></a>
+      </div>
     </div>
-  </div>
-  <!--footer fim-->
-</body>
-
+  </body>
 </html>
 
 <script>
+  function continuar() {
+  var nomeVar = ipt_nome.value
+  var usuarioVar = ipt_usuario.value
+  var senhaVar = ipt_senha.value
+  var confSenhaVar = ipt_confSenha.value
+  if (nomeVar < 2 || usuarioVar < 2) {
+    alert(`Nome ou Nome de usuário inválidos`);
+  } else if (senhaVar < 6 || senhaVar == usuarioVar) {
+    alert(`Senha precisa ter ao menos 6 dígitos e não pode ser igual ao nome de usuário`);
+  } else if (confSenhaVar != senhaVar
+  ) {
+    alert(`As senhas precisam ser iguais`);
+  } else {
+    etapa_1.style.display = 'none'
+    etapa_2.style.display = 'block'
+    etapa_2.style.display = 'flex'
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        usuarioServer: usuarioVar,
+        senhaServer: senhaVar,
+        // estadoServer: estadoVar,
+        // idadeServer: idadeVar,
+        // filhosServer: filhosVar,
+        // filhosPlanServer: filhosPlanVar
+      }),
+    })
+  }
+}
+
   function cadastrar() {
     aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var empresaVar = listaEmpresas.value
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      empresaVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
+    var estadoVar = slct_estado.value;
+    var idadeVar = Number(ipt_idade.value);
+    var filhosVar = Number(ipt_filhos.value);
+    var filhosPlanVar = Number(ipt_planejados.value);
+    if (estadoVar == "#") {
+    alert(`Selecione um estado válido`);
+    } else if (idadeVar <= 0) {
+    alert(`Idade inválida`);
+    } else if (filhosVar < 0 || filhosPlanVar < 0) {
+    alert(`Número de filhos não pode ser menor que zero`);
+    finalizarAguardar();
+    return false;
     } else {
       setInterval(sumirMensagem, 5000);
     }
@@ -135,10 +192,13 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        empresaServer: empresaVar
+        // nomeServer: nomeVar,
+        // usuarioServer: usuarioVar,
+        // senhaServer: senhaVar,
+        estadoServer: estadoVar,
+        idadeServer: idadeVar,
+        filhosServer: filhosVar,
+        filhosPlanServer: filhosPlanVar
       }),
     })
       .then(function (resposta) {
