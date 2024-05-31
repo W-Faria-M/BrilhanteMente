@@ -16,13 +16,13 @@
           <ul class="navbar">
             <li><a href="home.html">Inicial</a></li>
             <li>|</li>
-            <li><button onclick="blog()">Blog</button></li>
-            <li><button onclick="comunidade()">Comunidade</button></li>
+            <li><button onclick="btn_blog()">Blog</button></li>
+            <li><button onclick="btn_comunidade()">Comunidade</button></li>
           </ul>
         </div>
       </div>
       <div class="pai_home">
-        <div class="blog">
+        <div class="blog" id="blog">
             <div class="perfil">
                 <img style="width: 40px;" src="https://cdn3.iconfinder.com/data/icons/social-messaging-productivity-6/128/profile-circle2-512.png" alt="">
                 <h2>Nome Completo</h2>
@@ -31,7 +31,7 @@
                 Alguma coisa? <br><br>
                 Vincule seu e-mail?
             </div>
-            <div class="feed">
+            <div class="feed" id="feed">
                 <h1>Posts recentes</h1>
                 <div class="box_post">
                     <img style="width: 100%;" src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/03/criancas_uso_celular_tablet_tecnologia.jpg?w=1200&h=675&crop=1" alt="">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none;" class="comunidade">
+            <div style="display: none;" class="comunidade" id="posts">
               <div class="avisos">
                 <div id="alerta">
                 </div>
@@ -109,3 +109,20 @@
       </div>
 </body>
 </html>
+
+<script>
+    function btn_blog() {
+        document.body.style.backgroundColor = "#81c784"
+        blog.style.backgroundColor = "#BA68C8"
+        posts.style.display = "none"
+        feed.style.display = "block"
+        feed.style.display = "flex"
+    }
+    function btn_comunidade() {
+        document.body.style.backgroundColor = "#BA68C8"
+        blog.style.backgroundColor = "#81c784"
+        feed.style.display = "none"
+        posts.style.display = "block"
+        posts.style.display = "flex"
+    }
+</script>

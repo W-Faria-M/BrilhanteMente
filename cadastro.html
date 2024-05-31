@@ -32,19 +32,19 @@
             <div id="etapa_1">
               <div class="campo">
                 <span>Nome Completo</span>
-                <input type="text" id="ipt_usuario" />
+                <input type="text" id="ipt_nome" />
               </div>
               <div class="campo">
                 <span>Usuário</span>
-                <input type="text" id="ipt_senha" />
+                <input type="text" id="ipt_usuario" />
               </div>
               <div class="campo">
                 <span>Senha</span>
                 <input type="text" id="ipt_senha" />
               </div>
               <div class="campo">
-                <span>Confirmar de senha</span>
-                <input type="text" id="ipt_senha" />
+                <span>Confirmar senha</span>
+                <input type="text" id="ipt_confSenha" />
               </div>
               <br />
               <button class="botao" onclick="continuar()">Continuar</button>
@@ -52,49 +52,49 @@
             <div style="display: none" id="etapa_2">
               <div class="campo">
                 <span>Estado</span>
-                <select id="slct_estados">
+                <select id="slct_estado">
                   <option selected disabled value="#">
                     Selecione um estado
                   </option>
-                  <option value="1">Acre (AC)</option>
-                  <option value="2">Alagoas (AL)</option>
-                  <option value="3">Amapá (AP)</option>
-                  <option value="4">Amazonas (AM)</option>
-                  <option value="5">Bahia (BA)</option>
-                  <option value="6">Ceará (CE)</option>
-                  <option value="7">Espírito Santo (ES)</option>
-                  <option value="8">Goiás (GO)</option>
-                  <option value="9">Maranhão (MA)</option>
-                  <option value="10">Mato Grosso (MT)</option>
-                  <option value="11">Mato Grosso do Sul (MS)</option>
-                  <option value="12">Minas Gerais (MG)</option>
-                  <option value="13">Pará (PA)</option>
-                  <option value="14">Paraíba (PB)</option>
-                  <option value="15">Paraná (PR)</option>
-                  <option value="16">Pernambuco (PE)</option>
-                  <option value="17">Piauí (PI)</option>
-                  <option value="18">Rio de Janeiro (RJ)</option>
-                  <option value="19">Rio Grande do Norte (RN)</option>
-                  <option value="20">Rio Grande do Sul (RS)</option>
-                  <option value="21">Rondônia (RO)</option>
-                  <option value="22">Roraima (RR)</option>
-                  <option value="23">Santa Catarina (SC)</option>
-                  <option value="24">São Paulo (SP)</option>
-                  <option value="25">Sergipe (SE)</option>
-                  <option value="26">Tocantins (TO)</option>
+                  <option>Acre (AC)</option>
+                  <option>Alagoas (AL)</option>
+                  <option>Amapá (AP)</option>
+                  <option>Amazonas (AM)</option>
+                  <option>Bahia (BA)</option>
+                  <option>Ceará (CE)</option>
+                  <option>Espírito Santo (ES)</option>
+                  <option>Goiás (GO)</option>
+                  <option>Maranhão (MA)</option>
+                  <option>Mato Grosso (MT)</option>
+                  <option>Mato Grosso do Sul (MS)</option>
+                  <option>Minas Gerais (MG)</option>
+                  <option>Pará (PA)</option>
+                  <option>Paraíba (PB)</option>
+                  <option>Paraná (PR)</option>
+                  <option>Pernambuco (PE)</option>
+                  <option>Piauí (PI)</option>
+                  <option>Rio de Janeiro (RJ)</option>
+                  <option>Rio Grande do Norte (RN)</option>
+                  <option>Rio Grande do Sul (RS)</option>
+                  <option>Rondônia (RO)</option>
+                  <option>Roraima (RR)</option>
+                  <option>Santa Catarina (SC)</option>
+                  <option>São Paulo (SP)</option>
+                  <option>Sergipe (SE)</option>
+                  <option>Tocantins (TO)</option>
                 </select>
               </div>
               <div class="campo">
                 <span>Idade</span>
-                <input type="text" id="ipt_senha" />
+                <input type="text" id="ipt_idade" />
               </div>
               <div class="campo">
                 <span>Nº de filhos</span>
-                <input type="number" id="ipt_senha" />
+                <input type="number" id="ipt_filhos" />
               </div>
               <div class="campo">
                 <span>Filhos planejados</span>
-                <input type="number" id="ipt_senha" />
+                <input type="number" id="ipt_planejados" />
               </div>
               <br />
               <button class="botao" onclick="cadastrar()">cadastrar</button>
@@ -121,3 +121,38 @@
     </div>
   </body>
 </html>
+
+<script>
+function continuar() {
+  var nome = ipt_nome.value
+  var usuario = ipt_usuario.value
+  var senha = ipt_senha.value
+  var confSenha = ipt_confSenha.value
+  if (nome < 2 || usuario < 2) {
+    alert(`Nome ou Nome de usuário inválidos`);
+  } else if (senha < 6 || senha == usuario) {
+    alert(`Senha precisa ter ao menos 6 dígitos e não pode ser igual ao nome de usuário`);
+  } else if (confSenha != senha) {
+    alert(`As senhas precisam ser iguais`);
+  } else {
+    etapa_1.style.display = 'none'
+    etapa_2.style.display = 'block'
+    etapa_2.style.display = 'flex'
+  }
+}
+function cadastrar() {
+  var estado = slct_estado.value;
+  var idade = Number(ipt_idade.value);
+  var filhos = Number(ipt_filhos.value);
+  var filhosPlan = Number(ipt_planejados.value);
+  if (estado == "#") {
+    alert(`Selecione um estado válido`);
+  } else if (idade <= 0) {
+    alert(`Idade inválida`);
+  } else if (filhos < 0 || filhosPlan < 0) {
+    alert(`Número de filhos não pode ser menor que zero`);
+  } else {
+    // Conexão com o banco de dados -> redirecionar para a tela de login
+  }
+}
+</script>

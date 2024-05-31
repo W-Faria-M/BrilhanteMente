@@ -167,9 +167,8 @@ body {
     justify-content: center;
     text-align: center;
   }
-
-  /* Estilos gerais do formulário */
-#form_postagem {
+  
+  #form_postagem {
   width: 100%;
   height: 350px;
   padding: 20px;
@@ -180,14 +179,12 @@ body {
   text-align: center;
 }
 
-/* Estilos para os rótulos */
 #form_postagem label {
   display: block;
   font-weight: bold;
   color: #333;
 }
 
-/* Estilos para os campos de entrada */
 #form_postagem input[type="text"],
 #form_postagem textarea {
   width: 100%;
@@ -200,12 +197,10 @@ body {
   color: #333;
 }
 
-/* Estilos específicos para o textarea */
 #form_postagem textarea {
   resize: none;
 }
 
-/* Estilos para o botão */
 #form_postagem button {
   display: inline-block;
   padding: 10px 20px;
@@ -218,7 +213,6 @@ body {
   transition: background-color 0.3s;
 }
 
-/* Efeito de hover no botão */
 #form_postagem button:hover {
   background-color: #50c256;
 }
@@ -292,7 +286,14 @@ body {
   border: 2px solid #9C27B0;
 }
 
-.pai .box_login .form_cadastro #etapa_1, #etapa_2 {
+.pai .box_login .form_cadastro #etapa_1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pai .box_login .form_cadastro #etapa_2 {
   display: flex;
   justify-content: center;
   align-items: center;
