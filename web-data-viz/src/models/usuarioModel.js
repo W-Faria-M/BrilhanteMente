@@ -16,7 +16,7 @@ function cadastrar(nome, usuario, senha) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO usuario (nome, usuario, senha) VALUES ('${nome}', '${usuario}', '${senha}');
+        INSERT INTO usuario (nome, nomeUsuario, senha) VALUES ('${nome}', '${usuario}', '${senha}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     // formulario();
@@ -29,7 +29,7 @@ function cadastrar(nome, usuario, senha) {
 //     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
 //     //  e na ordem de inserção dos dados.
 //     var instrucaoSql = `
-//         INSERT INTO formulario (estado, idade, filhos, filhosPlan, ) VALUES ('${nome}', '${email}', '${senha}', '${empresaId}');
+//         INSERT INTO formulario (fkUsuario, estado, idade, nmrFilhos, nmrFilhosPlan, ) VALUES (1, '${estado}', '${idade}', '${filhos}', '${filhosPlan}');
 //     `;
 //     console.log("Executando a instrução SQL: \n" + instrucaoSql);
 // }
