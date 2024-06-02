@@ -56,10 +56,6 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var usuario = req.body.usuarioServer;
     var senha = req.body.senhaServer;
-    var estado = req.body.estadoServer;
-    var idade = req.body.idadeServer;
-    var filhos = req.body.filhosServer;
-    var filhosPlan = req.body.filhosPlanServer;
 
 
     // Faça as validações dos valores
@@ -69,7 +65,36 @@ function cadastrar(req, res) {
         res.status(400).send("Seu usuario está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    } else if (estado == undefined) {
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrar(nome, usuario, senha)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function formulario(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var estado = req.body.estadoServer;
+    var idade = req.body.idadeServer;
+    var filhos = req.body.filhosServer;
+    var filhosPlan = req.body.filhosPlanServer;
+
+    // Faça as validações dos valores
+    if (estado == undefined) {
         res.status(400).send("Seu estado está undefined!");
     } else if (idade == undefined) {
         res.status(400).send("Sua idade está undefined!");
@@ -80,7 +105,7 @@ function cadastrar(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, usuario, senha, estado, idade, filhos, filhosPlan)
+        usuarioModel.formulario(estado, idade, filhos, filhosPlan)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -100,5 +125,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    formulario
 }

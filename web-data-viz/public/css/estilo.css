@@ -286,6 +286,28 @@ body {
   border: 2px solid #9C27B0;
 }
 
+.alerta_erro{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 4px;
+  border: #673AB7 3px solid;
+  padding: 10px;
+  margin-right: 10%;
+}
+
+.card_erro #mensagem_erro{
+  font-weight: 500;
+  font-size: 20px;
+}
+
 .pai .box_login .form_cadastro #etapa_1 {
   display: flex;
   justify-content: center;

@@ -13,7 +13,7 @@
       <div class="box">
         <h1>
           <img
-            src="assets/imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg"
+            src="assets/icon/logo-BrilhanteMente1.jpg"
             alt="Logo"
           />
           <span id="roxo">Brilhante</span><span id="verde">Mente</span>
@@ -29,12 +29,12 @@
     <div class="pai">
       <div class="box_quadro">
         <div class="box_login">
-          <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-              <span id="mensagem_erro"></span>
-            </div>
-          </div>
           <div class="form_cadastro">
+            <div class="alerta_erro">
+              <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+              </div>
+            </div>
             <h2>Faça seu cadastro</h2>
             <div id="etapa_1">
               <div class="campo">
@@ -143,9 +143,47 @@
   ) {
     alert(`As senhas precisam ser iguais`);
   } else {
-    etapa_1.style.display = 'none'
-    etapa_2.style.display = 'block'
-    etapa_2.style.display = 'flex'
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        usuarioServer: usuarioVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML =
+          "Preencha o formulário para prosseguir";
+
+          etapa_1.style.display = 'none'
+          etapa_2.style.display = 'block'
+          etapa_2.style.display = 'flex'
+          
+          setTimeout(() => {
+            cardErro.style.display = "none";
+          }, "3500");
+
+          // limparFormulario();
+          // finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
   }
 }
 
@@ -154,10 +192,6 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-    var nomeVar = ipt_nome.value;
-    var usuarioVar = ipt_usuario.value;
-    var senhaVar = ipt_senha.value;
-    var confSenhaVar = ipt_confSenha.value;
     var estadoVar = slct_estado.value;
     var idadeVar = Number(ipt_idade.value);
     var filhosVar = Number(ipt_filhos.value);
@@ -175,7 +209,7 @@
     }
 
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/usuarios/formulario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -183,9 +217,6 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        usuarioServer: usuarioVar,
-        senhaServer: senhaVar,
         estadoServer: estadoVar,
         idadeServer: idadeVar,
         filhosServer: filhosVar,
@@ -205,15 +236,15 @@
             window.location = "login.html";
           }, "2000");
 
-          limparFormulario();
-          finalizarAguardar();
+          // limparFormulario();
+          // finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;
