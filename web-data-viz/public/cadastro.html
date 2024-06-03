@@ -18,7 +18,9 @@
             alt="Logo"
           />
           <div class="nome">
-            <h1><span id="roxo">Brilhante</span><span id="verde">Mente</span></h1>
+            <h1>
+              <span id="roxo">Brilhante</span><span id="verde">Mente</span>
+            </h1>
           </div>
         </div>
         <ul class="navbar">
@@ -38,8 +40,8 @@
                 <span id="mensagem_erro"></span>
               </div>
             </div>
-            <h2>Faça seu cadastro</h2>
             <div id="etapa_1">
+              <h2>Faça seu cadastro</h2>
               <div class="campo">
                 <span>Nome Completo</span>
                 <input type="text" id="ipt_nome" />
@@ -60,6 +62,7 @@
               <button class="botao" onclick="continuar()">Continuar</button>
             </div>
             <div style="display: none" id="etapa_2">
+              <h2>Conte-nos sobre você</h2>
               <div class="campo">
                 <span>Estado</span>
                 <select id="slct_estado">
@@ -138,14 +141,29 @@
     var usuarioVar = ipt_usuario.value;
     var senhaVar = ipt_senha.value;
     var confSenhaVar = ipt_confSenha.value;
-    if (nomeVar < 2 || usuarioVar < 2) {
-      alert(`Nome ou Nome de usuário inválidos`);
-    } else if (senhaVar < 6 || senhaVar == usuarioVar) {
-      alert(
-        `Senha precisa ter ao menos 6 dígitos e não pode ser igual ao nome de usuário`
-      );
+    if (nomeVar.length < 2 || usuarioVar.length < 2) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Nome ou Usuário inválido";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, "3000");
+    } else if (
+      senhaVar.length < 6 ||
+      senhaVar == usuarioVar
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Senha precisa ter ao menos 6 dígitos e não podem ser igual ao nome de usuário";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, "3000");
     } else if (confSenhaVar != senhaVar) {
-      alert(`As senhas precisam ser iguais`);
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "As senhas precisam ser idênticas";
+      instrucao.innerHTML = "Conte-nos sobre você";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, "3000");
     } else {
       fetch("/usuarios/cadastrar", {
         method: "POST",

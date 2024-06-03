@@ -82,7 +82,7 @@
     if (usuarioVar == "" || senhaVar == "") {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        "Preencha os campos para prosseguir";
       // finalizarAguardar();
       return false;
     } else {
@@ -125,7 +125,13 @@
             }, 1000); // apenas para exibir o loading
           });
         } else {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "Login ou senha inválidos";
           console.log("Houve um erro ao tentar realizar o login!");
+
+          setTimeout(() => {
+              cardErro.style.display = "none";
+            }, "3000");
 
           resposta.text().then((texto) => {
             console.error(texto);
