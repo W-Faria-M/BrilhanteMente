@@ -110,8 +110,42 @@ function formulario(req, res) {
     }
 }
 
+function contPosts(req, res) {
+    var usuario = req.body.usuarioServer;
+
+    if (usuario == undefined) {
+        res.status(400).send("Seu usuário está undefined!");
+    } else {
+
+        usuarioModel.contPosts(usuario)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+                        res.json(resultadoAutenticar[0]);
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Houve uma falha ao atualizar o total de posts");
+                    } else {
+                        res.status(403).send("Houve um erro ao atualizar o total de posts");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao atualizar a contagem de posts! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    formulario
+    formulario,
+    contPosts
 }

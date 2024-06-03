@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/dashboards.css" />
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <link rel="icon" href="./assets/icon/logo-BrilhanteMente-nobckgd1.png" />
+    <title>BrilhanteMente | Comunidade</title>
+  </head>
+  <body onload="validarSessao(), atualizarFeed()" style="background-color: #ba68c8;">
+    <div class="header_blog">
+      <div class="box">
+        <div class="brand">
+          <img
+            style="width: 60px"
+            src="assets/icon/logo-BrilhanteMente-nobckgd1.png"
+            alt="Logo"
+          />
+          <div class="nome">
+            <h1>
+              <span id="roxo">Brilhante</span><span id="verde">Mente</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pai">
+      <div class="blog_comunidade" id="blog">
+        <div class="perfil">
+          <img
+            style="width: 40px"
+            src="https://cdn3.iconfinder.com/data/icons/social-messaging-productivity-6/128/profile-circle2-512.png"
+            alt=""
+          />
+          <h3><span id="nomeCompleto">Nome Completo</span></h3>
+          <h4><span id="userName">Nome de usuário</span></h4>
+          <br />
+          <h4>Meus Posts: <span id="totalPosts">x</span></h4>
+          <br />
+          <div class="btn_blog">
+            <button onclick="btn_blog()">Blog</button>
+            <button onclick="btn_comunidade()">Comunidade</button>
+            <button onclick=" limparSessao()">Sair</button>
+          </div>
+        </div>
+        <div class="comunidade" id="posts">
+          <div class="avisos">
+            <div id="alerta"></div>
+            <div class="container">
+              <h1>Fazer um Post</h1>
+              <div class="div-form">
+                <form
+                  id="form_postagem"
+                  method="post"
+                  onsubmit="return publicar(event)"
+                >
+                  <label>
+                    Título:
+                    <br />
+                    <input
+                      name="titulo"
+                      id="titulo"
+                      maxlength="100"
+                      type="text"
+                    />
+                  </label>
+                  <br />
+                  <br />
+                  <label>
+                    Descrição (máximo de 250 caracteres):
+                    <br />
+                    <textarea
+                      name="descricao"
+                      id="textarea_descricao"
+                      maxlength="250"
+                      rows="5"
+                    ></textarea>
+                  </label>
+                  <br />
+                  <br />
+                  <button>Enviar</button>
+                </form>
+              </div>
+              <h1>Mural de Posts</h1>
+              <div class="div-results">
+                <div id="feed_container" class="feed-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="box_footer">
+        <h4>E-mail para contato: gabriel.barranco@sptech.school</h4>
+        <a href="https://github.com/W-Faria-M/BrilhanteMente"
+          ><img
+            src="https://media.wired.com/photos/5b36a5b6e237e87ce9592b8e/master/pass/Github-Microsoft-BIZ-FINAL.jpg"
+            style="width: 40px"
+            alt="`GitHub Icon"
+        /></a>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function btn_blog() {
+    window.location = "./blog.html"
+  }
+
+  function btn_comunidade() {
+    window.location = "./comunidade.html"
+  }
+
+  function publicar() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var usuario = sessionStorage.USER_USUARIO;
+
+    var corpo = {
+      titulo: form_postagem.titulo.value,
+      descricao: form_postagem.descricao.value,
+    };
+
+    fetch(`/avisos/publicar/${idUsuario}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(corpo),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          window.alert(
+            "Post realizado com sucesso pelo usuario: " + usuario + "!"
+          );
+          fetch("/usuarios/contPosts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              usuarioServer: sessionStorage.USER_USUARIO,
+            }),
+          })
+            .then(function (resposta) {
+              console.log("ESTOU NO THEN DO contPosts!");
+
+              if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                  console.log(json);
+                  console.log(JSON.stringify(json));
+                  sessionStorage.POSTS_USUARIO = json.totalPosts;
+                  btn_comunidade();
+                  window.location = "comunidade.html";
+                });
+              } else {
+                console.log("Houve um erro ao tentar atualizar os posts");
+
+                resposta.text().then((texto) => {
+                  console.error(texto);
+                  // finalizarAguardar(texto);
+                });
+              }
+            })
+            .catch(function (erro) {
+              console.log(erro);
+            });
+
+          return false;
+          atualizarFeed();
+          limparFormulario();
+          // finalizarAguardar();
+        } else if (resposta.status == 404) {
+          window.alert("Deu 404!");
+        } else {
+          throw (
+            "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
+            resposta.status
+          );
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  function editar(idPost) {
+    sessionStorage.ID_POSTAGEM_EDITANDO = idPost;
+    console.log("cliquei em editar - " + idPost);
+    window.alert(
+      "Você será redirecionado à página de edição do aviso de id número: " +
+        idPost
+    );
+    window.location = "/dashboard/edicao-post.html";
+  }
+
+  function deletar(idPost) {
+    console.log("Criar função de apagar post escolhido - ID" + idPost);
+    fetch(`/avisos/deletar/${idPost}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          window.alert(
+            "Post deletado com sucesso pelo usuario: " +
+              sessionStorage.getItem("USER_USUARIO") +
+              "!"
+          );
+          window.location = "./../blog.html";
+        } else if (resposta.status == 404) {
+          window.alert("Deu 404!");
+        } else {
+          throw (
+            "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
+            resposta.status
+          );
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function atualizarFeed() {
+    fetch("/avisos/listar")
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            var feed = document.getElementById("feed_container");
+            var mensagem = document.createElement("span");
+            feed.appendChild(mensagem);
+            throw "Nenhum resultado encontrado!!";
+          }
+
+          resposta.json().then(function (resposta, json) {
+            // console.log(json);
+            console.log(JSON.stringify(json));
+            // sessionStorage.ID_USUARIO = json.idUsuario;
+            // sessionStorage.FK_USUARIO = json.Autor;
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+            
+            // var id_Usuario = sessionStorage.ID_USUARIO
+            // var id_autor = sessionStorage.FK_USUARIO
+            var feed = document.getElementById("feed_container");
+            feed.innerHTML = "";
+            for (let i = 0; i < resposta.length; i++) {
+              var publicacao = resposta[i];
+
+              // criando e manipulando elementos do HTML via JavaScript
+              var divPublicacao = document.createElement("div");
+              // var spanID = document.createElement("span");
+              var spanTitulo = document.createElement("span");
+              var spanNome = document.createElement("span");
+              var divDescricao = document.createElement("div");
+              // if (id_Usuario == autor) {
+                var divButtons = document.createElement("div");
+                var btnEditar = document.createElement("button");
+                var btnDeletar = document.createElement("button");
+              // }
+
+              // spanID.innerHTML = "ID: <b>" + publicacao.idPost + "</b>";
+              spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+              spanNome.innerHTML =
+                "Autor: <b>" + publicacao.nomeUsuario + "</b>";
+              divDescricao.innerHTML =
+                "Descrição: <b>" + publicacao.descricao + "</b>";
+              btnEditar.innerHTML = "Editar";
+              btnDeletar.innerHTML = "Deletar";
+
+              divPublicacao.className = "publicacao";
+              spanTitulo.id = "inputNumero" + publicacao.idPost;
+              spanNome.className = "publicacao-nome";
+              spanTitulo.className = "publicacao-titulo";
+              divDescricao.className = "publicacao-descricao";
+
+              divButtons.className = "div-buttons";
+
+              btnEditar.className = "publicacao-btn-editar";
+              btnEditar.id = "btnEditar" + publicacao.idPost;
+              btnEditar.setAttribute("onclick", `editar(${publicacao.idPost})`);
+
+              btnDeletar.className = "publicacao-btn-editar";
+              btnDeletar.id = "btnDeletar" + publicacao.idPost;
+              btnDeletar.setAttribute(
+                "onclick",
+                `deletar(${publicacao.idPost})`
+              );
+
+              // divPublicacao.appendChild(spanID);
+              divPublicacao.appendChild(spanNome);
+              divPublicacao.appendChild(spanTitulo);
+              divPublicacao.appendChild(divDescricao);
+              divPublicacao.appendChild(divButtons);
+              divButtons.appendChild(btnEditar);
+              divButtons.appendChild(btnDeletar);
+              feed.appendChild(divPublicacao);
+            }
+
+            // finalizarAguardar();
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+        // finalizarAguardar();
+      });
+  }
+
+  function limparFormulario() {
+    document.getElementById("form_postagem").reset();
+  }
+</script>

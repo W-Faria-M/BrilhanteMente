@@ -2,13 +2,16 @@
 function validarSessao() {
     var nome = sessionStorage.NOME_USUARIO;
     var usuario = sessionStorage.USER_USUARIO;
+    var posts = sessionStorage.POSTS_USUARIO;
 
     var nomeCompleto = document.getElementById("nomeCompleto");
     var userName = document.getElementById("userName");
+    var totalPosts = document.getElementById("totalPosts");
 
-    if (nome != null && usuario != null) {
+    if (nome != null && usuario != null && posts != null) {
         nomeCompleto.innerHTML = nome;
         userName.innerHTML = usuario;
+        totalPosts.innerHTML = posts;
     } else {
         // window.location = "login.html";
     }

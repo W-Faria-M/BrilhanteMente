@@ -7,13 +7,14 @@ function listar() {
             p.id AS idPost,
             p.titulo,
             p.descricao,
-            p.fkUsuario,
+            p.fkUsuario AS Autor,
             u.id AS idUsuario,
             u.nomeUsuario,
             u.senha
         FROM post p
             INNER JOIN usuario u
-                ON p.fkUsuario = u.id;
+                ON p.fkUsuario = u.id
+                ORDER BY p.id DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

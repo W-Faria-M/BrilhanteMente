@@ -156,6 +156,16 @@ body {
   text-align: center;
 }
 
+.pai .blog_comunidade {
+  display: flex;
+  width: 950px;
+  height: 97%;
+  padding: 10px;
+  justify-content: space-evenly;
+  background-color: #81c784;
+  border: 2px solid #9c27b0;
+}
+
 .pai .blog {
   display: flex;
   width: 950px;
@@ -175,7 +185,7 @@ body {
   font-size: medium;
   width: 250px;
   height: 300px;
-  padding: 20px;
+  padding: 10px;
   border: 2px solid;
 }
 

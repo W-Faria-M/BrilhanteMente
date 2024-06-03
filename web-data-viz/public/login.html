@@ -13,12 +13,14 @@
       <div class="box">
         <div class="brand">
           <img
-            style="width: 60px;"
+            style="width: 60px"
             src="assets/icon/logo-BrilhanteMente2-nobckgd1.png"
             alt="Logo"
           />
           <div class="nome">
-            <h1><span id="roxo">Brilhante</span><span id="verde">Mente</span></h1>
+            <h1>
+              <span id="roxo">Brilhante</span><span id="verde">Mente</span>
+            </h1>
           </div>
         </div>
         <ul class="navbar">
@@ -112,10 +114,11 @@
             sessionStorage.NOME_USUARIO = json.nome;
             sessionStorage.USER_USUARIO = json.nomeUsuario;
             sessionStorage.ID_USUARIO = json.id;
+            sessionStorage.POSTS_USUARIO = json.totalPosts;
 
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
-            "Login efetuado com sucesso! Redirecionando para o Blog...";
+              "Login efetuado com sucesso! Redirecionando para o Blog...";
 
             setTimeout(function () {
               window.location = "blog.html";
