@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./js/sessao.js"></script>
     <link rel="stylesheet" href="./css/estilo.css" />
-    <link rel="icon" href="./assets/imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg">
+    <link rel="icon" href="./assets/icon/logo-BrilhanteMente-nobckgd1.png" />
     <title>BrilhanteMente | Cadastro</title>
   </head>
   <body>
     <div class="header">
       <div class="box">
-        <h1>
+        <div class="brand">
           <img
-            src="assets/icon/logo-BrilhanteMente1.jpg"
+            style="width: 60px"
+            src="assets/icon/logo-BrilhanteMente2-nobckgd1.png"
             alt="Logo"
           />
-          <span id="roxo">Brilhante</span><span id="verde">Mente</span>
-        </h1>
+          <div class="nome">
+            <h1><span id="roxo">Brilhante</span><span id="verde">Mente</span></h1>
+          </div>
+        </div>
         <ul class="navbar">
           <li><a href="index.html">Inicial</a></li>
           <li>|</li>
@@ -47,11 +50,11 @@
               </div>
               <div class="campo">
                 <span>Senha</span>
-                <input type="text" id="ipt_senha" />
+                <input type="password" id="ipt_senha" />
               </div>
               <div class="campo">
                 <span>Confirmar senha</span>
-                <input type="text" id="ipt_confSenha" />
+                <input type="password" id="ipt_confSenha" />
               </div>
               <br />
               <button class="botao" onclick="continuar()">Continuar</button>
@@ -131,61 +134,61 @@
 
 <script>
   function continuar() {
-  var nomeVar = ipt_nome.value;
-  var usuarioVar = ipt_usuario.value;
-  var senhaVar = ipt_senha.value;
-  var confSenhaVar = ipt_confSenha.value;
-  if (nomeVar < 2 || usuarioVar < 2) {
-    alert(`Nome ou Nome de usuário inválidos`);
-  } else if (senhaVar < 6 || senhaVar == usuarioVar) {
-    alert(`Senha precisa ter ao menos 6 dígitos e não pode ser igual ao nome de usuário`);
-  } else if (confSenhaVar != senhaVar
-  ) {
-    alert(`As senhas precisam ser iguais`);
-  } else {
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        usuarioServer: usuarioVar,
-        senhaServer: senhaVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-          mensagem_erro.innerHTML =
-          "Preencha o formulário para prosseguir";
-
-          etapa_1.style.display = 'none'
-          etapa_2.style.display = 'block'
-          etapa_2.style.display = 'flex'
-          
-          setTimeout(() => {
-            cardErro.style.display = "none";
-          }, "3500");
-
-          // limparFormulario();
-          // finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
+    var nomeVar = ipt_nome.value;
+    var usuarioVar = ipt_usuario.value;
+    var senhaVar = ipt_senha.value;
+    var confSenhaVar = ipt_confSenha.value;
+    if (nomeVar < 2 || usuarioVar < 2) {
+      alert(`Nome ou Nome de usuário inválidos`);
+    } else if (senhaVar < 6 || senhaVar == usuarioVar) {
+      alert(
+        `Senha precisa ter ao menos 6 dígitos e não pode ser igual ao nome de usuário`
+      );
+    } else if (confSenhaVar != senhaVar) {
+      alert(`As senhas precisam ser iguais`);
+    } else {
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          usuarioServer: usuarioVar,
+          senhaServer: senhaVar,
+        }),
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
-      });
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
 
-    return false;
+          if (resposta.ok) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Preencha o formulário para prosseguir";
+
+            etapa_1.style.display = "none";
+            etapa_2.style.display = "block";
+            etapa_2.style.display = "flex";
+
+            setTimeout(() => {
+              cardErro.style.display = "none";
+            }, "3500");
+
+            // limparFormulario();
+            // finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          // finalizarAguardar();
+        });
+
+      return false;
+    }
   }
-}
 
   function cadastrar() {
     aguardar();
@@ -197,13 +200,13 @@
     var filhosVar = Number(ipt_filhos.value);
     var filhosPlanVar = Number(ipt_planejados.value);
     if (estadoVar == "#") {
-    alert(`Selecione um estado válido`);
+      alert(`Selecione um estado válido`);
     } else if (idadeVar <= 0) {
-    alert(`Idade inválida`);
+      alert(`Idade inválida`);
     } else if (filhosVar < 0 || filhosPlanVar < 0) {
-    alert(`Número de filhos não pode ser menor que zero`);
-    finalizarAguardar();
-    return false;
+      alert(`Número de filhos não pode ser menor que zero`);
+      finalizarAguardar();
+      return false;
     } else {
       setInterval(sumirMensagem, 5000);
     }
@@ -220,7 +223,7 @@
         estadoServer: estadoVar,
         idadeServer: idadeVar,
         filhosServer: filhosVar,
-        filhosPlanServer: filhosPlanVar
+        filhosPlanServer: filhosPlanVar,
       }),
     })
       .then(function (resposta) {

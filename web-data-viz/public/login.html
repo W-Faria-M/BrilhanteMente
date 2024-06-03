@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./js/sessao.js"></script>
     <link rel="stylesheet" href="./css/estilo.css" />
-    <link rel="icon" href="./assets/icon/logo-BrilhanteMente.jpg">
+    <link rel="icon" href="./assets/icon/logo-BrilhanteMente-nobckgd1.png" />
     <title>BrilhanteMente | Login</title>
   </head>
   <body>
     <div class="header">
       <div class="box">
-        <h1>
+        <div class="brand">
           <img
-            src="assets/imagens/Brains Clipart Vector, Brain Logo, Brain, Concept, Graphic PNG Image For Free Download.jpg"
+            style="width: 60px;"
+            src="assets/icon/logo-BrilhanteMente2-nobckgd1.png"
             alt="Logo"
           />
-          <span id="roxo">Brilhante</span><span id="verde">Mente</span>
-        </h1>
+          <div class="nome">
+            <h1><span id="roxo">Brilhante</span><span id="verde">Mente</span></h1>
+          </div>
+        </div>
         <ul class="navbar">
           <li><a href="index.html">Inicial</a></li>
           <li>|</li>
@@ -35,14 +38,14 @@
                 <span id="mensagem_erro"></span>
               </div>
             </div>
-            <h2>Bem vindo de volta</h2>
+            <h2>Bem-vindo de volta!</h2>
             <div class="campo">
               <span>Usuário</span>
               <input type="text" id="ipt_usuario" />
             </div>
             <div class="campo">
               <span>Senha</span>
-              <input type="text" id="ipt_senha" />
+              <input type="password" id="ipt_senha" />
             </div>
             <span>Ainda não tem um login?</span>
             <span>Cadastre-se clicando <a href="cadastro.html">aqui</a></span>
@@ -50,7 +53,7 @@
             <button class="botao" onclick="entrar()">Entrar</button>
           </div>
         </div>
-        <img style="width: 26.1%;" src="assets/imagens/163245.webp" alt="" />
+        <img style="width: 26.1%" src="assets/imagens/163245.webp" alt="" />
       </div>
     </div>
     <div class="footer">
@@ -68,74 +71,73 @@
 </html>
 
 <script>
+  function entrar() {
+    aguardar();
 
+    var usuarioVar = ipt_usuario.value;
+    var senhaVar = ipt_senha.value;
 
-    function entrar() {
-        aguardar();
-
-        var usuarioVar = ipt_usuario.value;
-        var senhaVar = ipt_senha.value;
-
-        if (usuarioVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            // finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", usuarioVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                usuarioServer: usuarioVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.USER_USUARIO = json.nomeUsuario;
-                    sessionStorage.ID_USUARIO = json.id;
-
-                    setTimeout(function () {
-                        window.location = "blog.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    // finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
+    if (usuarioVar == "" || senhaVar == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+      // finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+    console.log("FORM LOGIN: ", usuarioVar);
+    console.log("FORM SENHA: ", senhaVar);
 
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        usuarioServer: usuarioVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.USER_USUARIO = json.nomeUsuario;
+            sessionStorage.ID_USUARIO = json.id;
+
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+            "Login efetuado com sucesso! Redirecionando para o Blog...";
+
+            setTimeout(function () {
+              window.location = "blog.html";
+            }, 1000); // apenas para exibir o loading
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar o login!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+            // finalizarAguardar(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
 </script>
