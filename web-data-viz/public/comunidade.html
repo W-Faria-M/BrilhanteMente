@@ -219,7 +219,7 @@
               sessionStorage.getItem("USER_USUARIO") +
               "!"
           );
-          window.location = "./../blog.html";
+          window.location = "./../comunidade.html";
         } else if (resposta.status == 404) {
           window.alert("Deu 404!");
         } else {
@@ -245,32 +245,27 @@
             throw "Nenhum resultado encontrado!!";
           }
 
-          resposta.json().then(function (resposta, json) {
-            // console.log(json);
-            console.log(JSON.stringify(json));
-            // sessionStorage.ID_USUARIO = json.idUsuario;
-            // sessionStorage.FK_USUARIO = json.Autor;
+          resposta.json().then(function (resposta) {
             console.log("Dados recebidos: ", JSON.stringify(resposta));
             
-            // var id_Usuario = sessionStorage.ID_USUARIO
-            // var id_autor = sessionStorage.FK_USUARIO
+            var id_Usuario = sessionStorage.ID_USUARIO
             var feed = document.getElementById("feed_container");
             feed.innerHTML = "";
             for (let i = 0; i < resposta.length; i++) {
               var publicacao = resposta[i];
-
+              console.log(publicacao)
               // criando e manipulando elementos do HTML via JavaScript
               var divPublicacao = document.createElement("div");
               // var spanID = document.createElement("span");
               var spanTitulo = document.createElement("span");
               var spanNome = document.createElement("span");
               var divDescricao = document.createElement("div");
-              // if (id_Usuario == autor) {
+
+              console.log(id_Usuario,publicacao.Autor)
                 var divButtons = document.createElement("div");
                 var btnEditar = document.createElement("button");
                 var btnDeletar = document.createElement("button");
-              // }
-
+               
               // spanID.innerHTML = "ID: <b>" + publicacao.idPost + "</b>";
               spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
               spanNome.innerHTML =
@@ -304,8 +299,11 @@
               divPublicacao.appendChild(spanTitulo);
               divPublicacao.appendChild(divDescricao);
               divPublicacao.appendChild(divButtons);
+              if (Number(id_Usuario) == Number(publicacao.Autor)) {
               divButtons.appendChild(btnEditar);
               divButtons.appendChild(btnDeletar);
+              }
+             
               feed.appendChild(divPublicacao);
             }
 
