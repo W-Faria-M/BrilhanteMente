@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./../js/sessao.js"></script>
+    <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="icon" href="./../assets/icon/logo-BrilhanteMente-nobckgd1.png" />
+    <title>BrilhanteMente | Blog</title>
+  </head>
+  <body onload="validarSessao(), atualizarFeed()">
+    <div class="header_blog">
+      <div class="box">
+        <div class="brand">
+          <img
+            style="width: 60px"
+            src="./../assets/icon/logo-BrilhanteMente2-nobckgd1.png"
+            alt="Logo"
+          />
+          <div class="nome">
+            <h1>
+              <span id="roxo">Brilhante</span><span id="verde">Mente</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pai">
+      <div class="blog" id="blog">
+        <div class="perfil">
+          <img
+            style="width: 40px"
+            src="https://cdn3.iconfinder.com/data/icons/social-messaging-productivity-6/128/profile-circle2-512.png"
+            alt=""
+          />
+          <h3><span id="nomeCompleto">Nome Completo</span></h3>
+          <h4><span id="userName">Nome de usuário</span></h4>
+          <br />
+          <div class="btn_blog">
+              <button onclick="btn_blog()">Blog</button>
+              <button onclick="btn_comunidade()">Comunidade</button>
+              <button onclick=" limparSessao()">Sair</button>
+          </div>
+        </div>
+        <div style="overflow-y: hidden;" class="feed">
+            <div class="dash-right">
+                <div class="avisos">
+                    <div class="container">
+                        <h1>Editar um aviso</h1>
+                        <div class="div-form">
+                            <label>
+                                ID:
+                                <br>
+                                <input id="input_id" maxlength="100" type="text" style="color: rgb(196, 196, 196)" disabled>
+                            </label>
+                            <label>
+                                Autor:
+                                <br>
+                                <input id="input_nome" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
+                                    disabled>
+                            </label>
+                            <label>
+                                Título:
+                                <br>
+                                <input id="input_titulo" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
+                                    disabled>
+                            </label>
+                            <br>
+                            <label>
+                                Descrição (máximo de 250 caracteres):
+                                <br>
+                                <textarea id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                            </label>
+                            <br>
+                            <button onclick="editar()">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="box_footer">
+        <h4>E-mail para contato: gabriel.barranco@sptech.school</h4>
+        <a href="https://github.com/W-Faria-M/BrilhanteMente"
+          ><img
+            src="https://media.wired.com/photos/5b36a5b6e237e87ce9592b8e/master/pass/Github-Microsoft-BIZ-FINAL.jpg"
+            style="width: 40px"
+            alt="`GitHub Icon"
+        /></a>
+      </div>
+    </div>
+  </body>
+</html>
+
+</html>
+
+<script>
+    function listarInfosDeUm() {
+        console.log("Criar função de trazer informações de post escolhido");
+    }
+
+    function editar() {
+        fetch(`/avisos/editar/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                descricao: textarea_descricao.value
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post atualizado com sucesso pelo usuario: " + sessionStorage.getItem("USER_USUARIO") + "!");
+                window.location = "./../blog.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+</script>

@@ -74,6 +74,7 @@ function cadastrar(req, res) {
 
 function formulario(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var nome = req.body.nomeServer;
     var estado = req.body.estadoServer;
     var idade = req.body.idadeServer;
     var filhos = req.body.filhosServer;
@@ -91,7 +92,7 @@ function formulario(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.formulario(estado, idade, filhos, filhosPlan)
+        usuarioModel.formulario(nome, estado, idade, filhos, filhosPlan)
             .then(
                 function (resultado) {
                     res.json(resultado);

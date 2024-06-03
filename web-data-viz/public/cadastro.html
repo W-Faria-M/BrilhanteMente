@@ -195,6 +195,7 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
+    var nomeVar = ipt_nome.value;
     var estadoVar = slct_estado.value;
     var idadeVar = Number(ipt_idade.value);
     var filhosVar = Number(ipt_filhos.value);
@@ -220,6 +221,7 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
         estadoServer: estadoVar,
         idadeServer: idadeVar,
         filhosServer: filhosVar,

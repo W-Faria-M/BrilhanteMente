@@ -26,6 +26,10 @@ body {
 }
 
 .dash-right .avisos .container .div-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 95%;
 }
 
@@ -43,8 +47,9 @@ body {
 }
 
 .dash-right .avisos .div-form textarea {
+  resize: vertical;
   width: 95%;
-  border: 3px solid #e6005a;
+  border: 3px solid #9C27B0;
   background-color: white;
   border-radius: 5px;
 }
@@ -58,8 +63,12 @@ body {
   font-size: 18px;
   padding: 10px 15px;
   color: white;
-  background-color: #e6005a;
+  background-color: #81c784;
   width: 120px;
+}
+
+.dash-right .avisos .div-form button:hover {
+  background-color: #50c256;
 }
 
 .publicacao-btn-editar {
@@ -356,11 +365,8 @@ canvas {
   display: flex;
   width: 70%;
   height: fit-content;
-  background-color: #161618;
-  position: relative;
-  top: 0;
-  left: 25%;
-  height: 100vh;
+  padding: 20px;
+  background-color: #4CAF50;
   overflow: auto;
 }
 
