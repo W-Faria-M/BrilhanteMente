@@ -9,7 +9,7 @@
     <link rel="icon" href="./../assets/icon/logo-BrilhanteMente-nobckgd1.png" />
     <title>BrilhanteMente | Blog</title>
   </head>
-  <body onload="validarSessao(), atualizarFeed()">
+  <body onload=" listarInfosDeUm()">
     <div class="header_blog">
       <div class="box">
         <div class="brand">
@@ -99,7 +99,36 @@
 
 <script>
     function listarInfosDeUm() {
-        console.log("Criar função de trazer informações de post escolhido");
+      var idPost = sessionStorage.ID_POSTAGEM_EDITANDO
+      fetch(`/avisos/listar/${idPost}`)
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            // var feed = document.getElementById("feed_container");
+            // var mensagem = document.createElement("span");
+            // feed.appendChild(mensagem);
+            throw "Nenhum resultado encontrado!!";
+          }
+
+          resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+            
+            var publicacao = resposta
+            input_id.value = publicacao[0].idPost;
+            input_nome.value = publicacao[0].Autor;
+            input_titulo.value = publicacao[0].titulo;
+            textarea_descricao.value = publicacao[0].descricao;
+
+            // finalizarAguardar();
+          });
+        } else {
+          throw "Houve um erro na API!";
+        }
+      })
+      .catch(function (resposta) {
+        console.error(resposta);
+        // finalizarAguardar();
+      });
     }
 
     function editar() {

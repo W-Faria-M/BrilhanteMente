@@ -41,22 +41,20 @@ function pesquisarDescricao(texto) {
     return database.executar(instrucaoSql);
 }
 
-function listarPorUsuario(idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
+function listarPorPost(idPost) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario(idPost)");
     var instrucaoSql = `
         SELECT 
-            a.id AS idAviso,
-            a.titulo,
-            a.descricao,
-            a.fk_usuario,
+            p.id AS idPost,
+            p.titulo,
+            p.descricao,
+            p.fkUsuario,
             u.id AS idUsuario,
-            u.nome,
-            u.email,
-            u.senha
-        FROM aviso a
+            u.nome AS Autor
+        FROM post p
             INNER JOIN usuario u
-                ON a.fk_usuario = u.id
-        WHERE u.id = ${idUsuario};
+                ON p.fkUsuario = u.id
+        WHERE p.id = ${idPost};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -91,7 +89,7 @@ function deletar(idPost) {
 
 module.exports = {
     listar,
-    listarPorUsuario,
+    listarPorPost,
     pesquisarDescricao,
     publicar,
     editar,

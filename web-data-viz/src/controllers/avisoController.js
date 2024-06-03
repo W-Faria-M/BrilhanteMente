@@ -14,10 +14,10 @@ function listar(req, res) {
     });
 }
 
-function listarPorUsuario(req, res) {
-    var idUsuario = req.params.idUsuario;
+function listarPorPost(req, res) {
+    var idPost = req.params.idPost;
 
-    avisoModel.listarPorUsuario(idUsuario)
+    avisoModel.listarPorPost(idPost)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -128,7 +128,7 @@ function deletar(req, res) {
 
 module.exports = {
     listar,
-    listarPorUsuario,
+    listarPorPost,
     pesquisarDescricao,
     publicar,
     editar,
