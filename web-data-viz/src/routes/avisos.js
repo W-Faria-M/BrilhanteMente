@@ -27,4 +27,8 @@ router.delete("/deletar/:idPost", function (req, res) {
     avisoController.deletar(req, res);
 });
 
+router.post("/curtir/:idPost/:idUsuario", function (req, res) {
+    avisoController.like(req, res);
+});
+
 module.exports = router;

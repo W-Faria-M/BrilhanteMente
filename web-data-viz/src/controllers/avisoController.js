@@ -126,11 +126,31 @@ function deletar(req, res) {
         );
 }
 
+function like(req, res) {
+    var idPost = req.params.idPost;
+    var idUsuario = req.params.idUsuario;
+
+    avisoModel.like(idPost, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao curtir o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     listar,
     listarPorPost,
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletar,
+    like
 }
