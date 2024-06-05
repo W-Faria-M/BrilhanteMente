@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./css/estilo.css" />
     <link rel="icon" href="./assets/icon/logo-BrilhanteMente-nobckgd1.png" />
     <title>BrilhanteMente | Página inicial</title>
   </head>
-  <body>
+  <body onload="obterDadosGrafico()">
     <div class="header">
       <div class="box">
         <div class="brand">
@@ -38,7 +39,8 @@
             <h1>Sobre Mim</h1>
             <br />
             Prazer, meu nome é Gabriel, mas pode me chamar de Faria. <br />
-            <br /> Eu tenho um enorme carinho e uma paixão muito grande por crianças,
+            <br />
+            Eu tenho um enorme carinho e uma paixão muito grande por crianças,
             desde pequeno, amo dar atenção e fazer brincadeiras, que embora
             sejam tão singelas, são capazes de trazer as mais lindas e sinceras
             gargalhadas de uma criança. <br /><br />
@@ -73,20 +75,26 @@
             moldam seu comportamento, personalidade e capacidades emocionais.
             Proporcionar um ambiente de amor, carinho e segurança não só
             fortalece os laços afetivos, mas também contribui para o
-            desenvolvimento cognitivo e emocional. <br><br> Crianças que crescem em
-            ambientes tranquilos e saudáveis tendem a desenvolver maior
-            autoestima, resiliência e habilidades sociais. Além disso, uma infância tranquila
-            ajuda a prevenir problemas emocionais e comportamentais no futuro.
-            Entender a sensibilidade e a vulnerabilidade dos
-            pequenos nos permite oferecer um suporte adequado, essencial para
-            que eles cresçam felizes e se tornem adultos saudáveis e
-            equilibrados.
+            desenvolvimento cognitivo e emocional. <br /><br />
+            Crianças que crescem em ambientes tranquilos e saudáveis tendem a
+            desenvolver maior autoestima, resiliência e habilidades sociais.
+            Além disso, uma infância tranquila ajuda a prevenir problemas
+            emocionais e comportamentais no futuro. Entender a sensibilidade e a
+            vulnerabilidade dos pequenos nos permite oferecer um suporte
+            adequado, essencial para que eles cresçam felizes e se tornem
+            adultos saudáveis e equilibrados.
           </div>
         </div>
       </div>
       <br />
       <div class="box_home">
-
+          <div class="inside_graph">
+            <h1>Mentes Brilhantes pelo Brasil 🗺️</h1>
+            <br />
+            <div class="graph">
+              <canvas id="myChartCanvas" style="background-color: rgba(129, 199, 132, 0.8);"></canvas>
+            </div>
+          </div>
       </div>
     </div>
     <div class="footer">
@@ -102,3 +110,110 @@
     </div>
   </body>
 </html>
+
+<script>
+  function obterDadosGrafico() {
+    fetch(`/medidas/ultimas`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function plotarGrafico(resposta) {
+    console.log("iniciando plotagem do gráfico...");
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Usuarios",
+          data: [],
+          fill: false,
+          backgroundColor: "#9C27B0",
+          tension: 0.1,
+        },
+      ],
+    };
+    let options = {
+            scales: {
+                x: {
+                    ticks: {
+                        color: "#000" // Cor do texto no eixo x
+                    },
+                    grid: {
+                        color: "rgba(0, 0, 0, 0.2)" // Cor das linhas de grade no eixo x com 20% de opacidade
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: "#000" // Cor do texto no eixo y
+                    },
+                    grid: {
+                        color: "rgba(0, 0, 0, 0.2)" // Cor das linhas de grade no eixo x com 20% de opacidade
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#000" // Cor do texto da legenda
+                    }
+                }
+            }
+        };
+
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.estado);
+      dados.datasets[0].data.push(registro.UsuariosPorEstado);
+    }
+
+    console.log("----------------------------------------------");
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("Labels:");
+    console.log(labels);
+    console.log("Dados:");
+    console.log(dados.datasets);
+    console.log("----------------------------------------------");
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: "bar",
+      data: dados,
+      options: options
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(document.getElementById(`myChartCanvas`), config);
+  }
+</script>

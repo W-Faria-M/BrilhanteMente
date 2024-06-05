@@ -256,10 +256,7 @@
         } else if (resposta.status == 404) {
           window.alert("Deu 404!");
         } else {
-          throw (
-            "Houve um erro ao tentar curtir a postagem! Código da resposta: " +
-            resposta.status
-          );
+          console.log("Criar função de 'deslike'.")
         }
       })
       .catch(function (resposta) {
